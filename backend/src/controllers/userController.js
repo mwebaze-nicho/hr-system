@@ -127,18 +127,15 @@ exports.loginUser = async (req, res) => {
 
 //update user profile
 exports.updateUser = async (req, res) => {
-  // const { role } = await req.user;
-
-  // if (role !== "admin")
-  //   return res
-  //     .status(401)
-  //     .json({ message: "You are not allowed to perform this action" });
-
   //get user id from the params
   const userId = req.params.userId;
+  const { userPassword } = req.body;
 
   try {
-    const user = await User.findByIdAndUpdate(userId, req.body);
+    const hashedPassword = await bcrypt.hash(userPassword, 12);
+    const user = await User.findByIdAndUpdate(userId, {
+      userPassword: hashedPassword,
+    });
 
     if (!user) return res.status(404).json({ message: "User not found" });
 
