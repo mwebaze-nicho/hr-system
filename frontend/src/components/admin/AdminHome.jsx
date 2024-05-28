@@ -21,7 +21,7 @@ const AdminHome = () => {
   const { username } = userInfo();
 
   useEffect(() => {
-    if (data?.users) {
+    if (data && data?.users) {
       setUsersData(data.users);
 
       const attendees = data.users.filter((user) => user.status === "present");
