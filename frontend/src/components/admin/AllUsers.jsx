@@ -42,6 +42,11 @@ const AllUsersRecords = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  
+  if (!data || !data.users) {
+    return <div>No users records found.</div>;
+  }
+
   return (
     <div className="container mx-auto p-4">
       <Link href={"/admin/dashboard"} className="mb-8">

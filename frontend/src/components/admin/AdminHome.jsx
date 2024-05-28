@@ -21,7 +21,9 @@ const AdminHome = () => {
   const { username } = userInfo();
 
   useEffect(() => {
-    if (data && data?.users) {
+    if (!data || !data.users) {
+      return <div>No leave records found.</div>;
+    } else {
       setUsersData(data.users);
 
       const attendees = data.users.filter((user) => user.status === "present");
